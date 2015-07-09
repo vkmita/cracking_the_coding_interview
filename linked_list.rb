@@ -1,6 +1,7 @@
 module LinkedList
   class Node
-    attr_accessor :node, :next
+    attr_reader :node
+    attr_accessor :next
 
     def initialize(node)
       @node = node
