@@ -1,7 +1,9 @@
-class Node
-  attr_accessor :node, :next
+module LinkedList
+  class Node
+    attr_accessor :node, :next
 
-  def initialize(node)
-    @node = node
+    def initialize(node)
+      @node = node
+    end
   end
 end
