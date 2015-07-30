@@ -22,41 +22,37 @@ class DiagonalMatrixPrinter
     [:right, :down, :left, :up].cycle do |direction|
       case direction
       when :right
-        right_left((current_x.upto(current_x + width)), 1)
+        print_line((current_x.upto(current_x + width)), y: 1)
       when :down
-        down_up((current_y.upto(current_y + height)), -1)
+        print_line((current_y.upto(current_y + height)), x: -1)
       when :left
-        right_left(current_x.downto(current_x - width), -1)
+        print_line(current_x.downto(current_x - width), y: -1)
       when :up
-        down_up(current_y.downto(current_y - height), 1)
+        print_line(current_y.downto(current_y - height), x: 1)
       end
 
-      if width < 0 || height < -1
+      if done?
         return puts "#{result}"
       end
     end
   end
 
-  def right_left(range, y_change)
-    range.each do |current_x|
+  def print_line(range, changes)
+    range.each do |current|
       puts "#{current_x} #{current_y} : #{matrix[current_y][current_x]}"
-      self.current_x = current_x
-      self.result <<  matrix[current_y][current_x]
-    end
-
-    self.width -= 1
-    self.current_y = current_y + y_change
-  end
-
-  def down_up(range, x_change)
-    range.each do |current_y|
-      puts "#{current_x} #{current_y} : #{matrix[current_y][current_x]}"
-      self.current_y = current_y
+      self.current_y = current if changes[:x]
+      self.current_x = current if changes[:y]
       result <<  matrix[current_y][current_x]
     end
 
-    self.height -= 1
-    self.current_x = current_x + x_change
+    self.height -= 1 if changes[:x]
+    self.width -= 1 if changes[:y]
+    self.current_y = current_y + changes[:y] if changes[:y]
+    self.current_x = current_x + changes[:x] if changes[:x]
+  end
+
+  def done?
+    width < 0 || height < -1
   end
 end
 
