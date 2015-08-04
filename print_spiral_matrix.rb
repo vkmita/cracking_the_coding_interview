@@ -2,7 +2,7 @@ require 'byebug'
 
 # Matrix is a 2d array
 
-class DiagonalMatrixPrinter
+class SpiralMatrixPrinter
   attr_accessor :height, :width, :current_x, :current_y, :current_direction_x, :current_direction_y, :result
   attr_reader :matrix
 
@@ -38,10 +38,12 @@ class DiagonalMatrixPrinter
   end
 
   def print_line(range, changes)
-    range.each do |current|
+    range.step do |current|
       puts "#{current_x} #{current_y} : #{matrix[current_y][current_x]}"
+
       self.current_y = current if changes[:x]
       self.current_x = current if changes[:y]
+
       result <<  matrix[current_y][current_x]
     end
 
@@ -62,7 +64,7 @@ matrix = [
   [7, 6, 5]
 ]
 
-DiagonalMatrixPrinter.new(matrix).print
+SpiralMatrixPrinter.new(matrix).print
 
 matrix = [
   [1,   2,  3, 4],
@@ -71,14 +73,14 @@ matrix = [
   [10,  9,  8, 7]
 ]
 
-DiagonalMatrixPrinter.new(matrix).print
+SpiralMatrixPrinter.new(matrix).print
 
 matrix = [
   [1,   2,  3, 4, 5, 6],
   [12, 11, 10, 9, 8, 7]
 ]
 
-DiagonalMatrixPrinter.new(matrix).print
+SpiralMatrixPrinter.new(matrix).print
 
 matrix = [
   [1, 2],
@@ -87,4 +89,4 @@ matrix = [
   [6, 5]
 ]
 
-DiagonalMatrixPrinter.new(matrix).print
+SpiralMatrixPrinter.new(matrix).print
