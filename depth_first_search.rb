@@ -54,6 +54,8 @@ class DepthFirstSearch
   def should_explore?(exploaration)
     !explored.member?(exploaration) && !expanded.index(exploaration)
   end
+
+
 end
 
 pacman_r, pacman_c = gets.strip.split.map(&:to_i)
